@@ -7,6 +7,8 @@
           <th>Picture</th>
           <th>Name</th>
           <th>Popularity</th>
+          <th>Won Oscar</th>
+          <th>Won Emmy</th>
         </tr>
       </thead>
       <tbody>
@@ -24,6 +26,8 @@
           <td>
             <p>{{ contact.popularity.toFixed(2) }}</p>
           </td>
+          <td>{{ isTrophy(contact.wonOscar) }}</td>
+          <td>{{ isTrophy(contact.wonEmmy) }}</td>
         </tr>
       </tbody>
     </table>
@@ -60,7 +64,7 @@ export default {
             "https://image.tmdb.org/t/p/w500/qlT4904d8oi2NIs28RrgnIZDFZB.jpg",
           popularity: 16.096436,
           id: "0ad5e441-3084-47a1-9e9b-b917539bba71",
-          wonOscar: false,
+          wonOscar: true,
           wonEmmy: false,
         },
         {
@@ -70,7 +74,7 @@ export default {
           popularity: 10.049256,
           id: "b497e3c4-50bb-4ae2-912f-eb36802c5bc2",
           wonOscar: false,
-          wonEmmy: false,
+          wonEmmy: true,
         },
         {
           name: "Ian McKellen",
@@ -83,6 +87,13 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    isTrophy(value) {
+      if (value === true) {
+        return "🏆";
+      }
+    },
   },
 };
 </script>
