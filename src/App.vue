@@ -15,7 +15,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="contact in ListOfContacts" :key="contact.name">
+        <tr v-for="(contact, index) in ListOfContacts" :key="index">
           <td>
             <img
               :src="contact.pictureUrl"
@@ -31,6 +31,11 @@
           </td>
           <td>{{ isTrophy(contact.wonOscar) }}</td>
           <td>{{ isTrophy(contact.wonEmmy) }}</td>
+          <td>
+            <button v-on:click="deleteCharacter(index)">
+              Delete {{ index }}
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -42,12 +47,11 @@ import contacts from "./contacts.json";
 export default {
   data() {
     return {
-      ListOfContacts: []
-        
+      ListOfContacts: [],
     };
   },
-  mounted(){
-    this.ListOfContacts = contacts.slice(0,5)
+  mounted() {
+    this.ListOfContacts = contacts.slice(0, 5);
   },
   methods: {
     isTrophy(value) {
@@ -55,21 +59,24 @@ export default {
         return "🏆";
       }
     },
-    addCharacter(){
-      let randomNumber = Math.floor(Math.random()*contacts.length);
+    addCharacter() {
+      let randomNumber = Math.floor(Math.random() * contacts.length);
       let character = contacts[randomNumber];
-      console.log(character.name)
-      if(!this.ListOfContacts.includes(character)){
-        this.ListOfContacts.push(character)
+      console.log(character.name);
+      if (!this.ListOfContacts.includes(character)) {
+        this.ListOfContacts.push(character);
       }
     },
-    sortByPopularity(){
-      this.ListOfContacts.sort((a,b) => b.popularity - a.popularity);
+    sortByPopularity() {
+      this.ListOfContacts.sort((a, b) => b.popularity - a.popularity);
     },
-    sortByName(){
-      this.ListOfContacts.sort((a,b) => a.name.localeCompare(b.name));
+    sortByName() {
+      this.ListOfContacts.sort((a, b) => a.name.localeCompare(b.name));
       console.table(this.ListOfContacts);
-    }
+    },
+    deleteCharacter(index) {
+      this.ListOfContacts.splice(index, 1);
+    },
   },
 };
 </script>
