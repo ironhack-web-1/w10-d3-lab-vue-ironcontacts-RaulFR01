@@ -54,10 +54,12 @@ export default {
       }
     },
     addCharacter(){
-      const random = Math.floor(Math.random()*contacts.length);
-      const character = contacts[random];
-      this.ListOfContacts.push(character)
-      console.table(this.ListOfContacts);
+      let randomNumber = Math.floor(Math.random()*contacts.length);
+      let character = contacts[randomNumber];
+      console.log(character.name)
+      if(!this.ListOfContacts.includes(character)){
+        this.ListOfContacts.push(character)
+      }
     }
   },
 };
