@@ -2,6 +2,8 @@
   <div id="app">
     <h1>IronContacts</h1>
     <button v-on:click="addCharacter()">Add random character</button>
+    <button v-on:click="sortByPopularity()">Sort by popularity</button>
+    <button v-on:click="sortByName()">Sort by name</button>
     <table style="border: 1px solid black">
       <thead>
         <tr>
@@ -60,6 +62,13 @@ export default {
       if(!this.ListOfContacts.includes(character)){
         this.ListOfContacts.push(character)
       }
+    },
+    sortByPopularity(){
+      this.ListOfContacts.sort((a,b) => b.popularity - a.popularity);
+    },
+    sortByName(){
+      this.ListOfContacts.sort((a,b) => a.name.localeCompare(b.name));
+      console.table(this.ListOfContacts);
     }
   },
 };
